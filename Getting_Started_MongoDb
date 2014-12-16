@@ -72,6 +72,12 @@ insertData('newDb', 'testData', 10)
 --15. To see the count of the collection
 db.testData.count()
 
+----
+--SQL to MongoDB Mapping Chart ***Very Important Link***
+http://docs.mongodb.org/manual/reference/sql-comparison/
+----
+--Getting Started Link
+http://docs.mongodb.org/manual/tutorial/getting-started/
 
 
 
