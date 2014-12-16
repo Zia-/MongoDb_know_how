@@ -1,0 +1,122 @@
+----
+--Details can be found on this website
+http://docs.mongodb.org/manual/tutorial/getting-started/
+----
+
+--1. To start mongod shell in order to interact with the Db, issue the following word from the terminal
+--It's like psql for postgresql
+mongo
+
+--2. The above command is assuming that the Db server is listening on port 27017 and it's a localhost
+--To connect to a different port or host/interface use the following command (although havn't tested yet this command)
+mongo --host 160.75.133.175 --port 1111
+
+--3. To see the current Db name
+db
+
+--4. To see the list of Dbs (this command will not show the temporary Dbs. But once some data is inside that newly created
+temporary db (created using the command 'use newDb'), you can see its name under the 'show dbs' command)
+show dbs
+OR
+show databases
+
+--5. To create a new Db and enter into it
+use newDb
+
+--6. Help
+help
+
+----
+Insert Operations
+----
+
+--7. Inside the Db we create a COLLECTION (equivalent to a TABLE) and insert our DOCUMENTS (equivalent to the ROWS) into 
+--those COLLECTIONS. MongoDB will create a COLLECTION implicitly upon its first use. You do not need to create a COLLECTION 
+--before inserting data. Furthermore, because MongoDB uses dynamic schemas, you also need not specify the structure of your 
+--DOCUMENTS before inserting them into the COLLECTION.
+
+--8. Create the documents using JS approach
+j = { name : "mongo" }
+k = { x : 3 }
+
+--9. Insert the documents into the collections (When you insert the first document, the mongod will create both the newDb 
+--database and the testData collection.)
+db.testData.insert( j )
+db.testData.insert( k )
+
+--10. To see the list of collections in the current Db
+show collections
+
+--11. To check the all the existing DOCUMENTS in a COLLECTION
+db.testData.find()
+
+--12. To insert the DOCUMENTS into the COLLECTION using the JS FOR LOOP
+for (var i = 1; i <= 25; i++) {
+   db.testData.insert( { x : i } )
+}
+
+--13. Create a JS function to feed the DOCUMENTS (if the Db and COLLECTION don't exist, MongoDb will create one for you
+--before feeding the DOCUMENTS). You can save these kinda JS functions into a file named 'mongorc.js' and place it in
+--the /etc/ dir (function will be globally available this way). This way those functions will be available everytime 
+--the MongoDb gets start-up. The 'mongorc.js' must have the read permissions for the user running the Db.
+function insertData(dbName, colName, num) {
+  var col = db.getSiblingDB(dbName).getCollection(colName);
+  for (i = 0; i < num; i++) {
+    col.insert({x:i});
+  }
+  print(col.count());
+}
+--To run the above function
+insertData('newDb', 'testData', 10)
+
+--15. To see the count of the collection
+db.testData.count()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
